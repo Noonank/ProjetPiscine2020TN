@@ -10,94 +10,126 @@
 	<!-- >"width=device-width" définit la largeur de la fenêtre lors de l'ouverture à notre appareil (téléophone ou ordi). 
   			"initial-scale=1" définit le niveau de zoom initial lors du premier chargement de la page par le navigateur.
   			SOURCES : TP7 ECE Paris <-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 
-  	<link rel="stylesheet" type="text/css" href="styles.css">
-  	<script type="text/javascript">
-  		$(document).ready(function(){
-  		$('.header').height($(window).height());
-  		});
-  	</script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $('.header').height($(window).height());
+    });
+  </script>
 
 </head>
 
+<!-- DEBUT DU BODY -->
 <body>
 
-	<nav class="navbar navbar-expand-md">
-	<div class="container-fluid">
-    <div class="navbar-header">
-     	<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-    		<img src="logo.png" height="50" width="50" alt="Image"></span>
-  		</button>
-    </div>
+<!-- DEBUT BANNIERE EN HAUT -->
+<nav class="navbar navbar-expand-md">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+      <img src="logo.png" height="50" width="50" alt="Image"></span>
+  	button>
+  </div>
 
-    <div class="collapse navbar-collapse" id="main-navigation">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" href="#">Vendre</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Votre compte</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Panier</a></li>
-      </ul>
-    </div>
-  	</div>
-	</nav>
+  <div class="collapse navbar-collapse" id="main-navigation">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item"><a class="nav-link" href="#">Vendre</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Votre compte</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Panier</a></li>
+    </ul>
+  </div>
+</div>
+</nav>
 
-	<nav class="navbar navbar-expand-md">
-	  <div class="container-fluid">
-	    <ul class="nav navbar-nav navbar-left">
-	      <li><a class="navbar-brand" href="#">Achat</a></li>
-	      <li><a class="navbar-brand" href="#">Catégorie</a></li>
-	    </ul>
-	  </div>
-	</nav>
-  
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid">
+	  <ul class="nav navbar-nav navbar-left">
+	    <li><a class="navbar-brand" href="#">Achat</a></li>
+	    <li><a class="navbar-brand" href="#">Catégorie</a></li>
+	  </ul>
+	</div>
+</nav>
+<!-- FIN BANNIERE EN HAUT -->
+
+
+
+<!-- DEBUT CHOIX DES MOYENS DE VENTE -->
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid text-center>
+	  <ul class="nav navbar-nav navbar-left">
+	    <li><a class="navbar-brand" href="#">Achats immédiats</a></li>
+      <li><a class="navbar-brand" href="#">Meilleures offres</a></li>
+      <li><a class="navbar-brand" href="#">Enchères</a></li>
+	  </ul>
+	</div>
+</nav>
+<!-- FIN CHOIX DES MOYENS DE VENTE -->
+
+<!-- DEBUT CHOIX DES CATEGORIES -->
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div class="col-sm-2" style="height:300px; background-color:#FFFFFF;">
+    <div class="col-sm-2" style="height:300px; background-color: #FFFFFF;">
       <p><br />Catégories <br /> <br /></p>
       <p><a href="#">Ferraille ou Trésor</a></p>
       <p><a href="#">Bon pour le Musée</a></p>
       <p><a href="#">Accessoires VIP</a></p>
     </div>
+    <!-- FIN CHOIX DES CATEGORIES -->
+        
+    <div class="col-sm-8 text-left">     
+      <h1>Voici l'ensemble des articles présents sur le site</h1>   
 
+      <!-- AFFICHAGE DES IMAGES : 3 IMAGES PAR LIGNE ET INFORMATION SUR LE NOM DU VENDEUR -->
+      <div class="container">    
+        <div class="row">
+          <div class="col-sm-4 text-center">
+            <img src="paques1.jpg" style="width:100%" alt="Image">
+            <p>Par le vendeur XXX</p>
+          </div>
+              
+          <div class="col-sm-4 text-center"> 
+            <img src="paques2.jpg" style="width:100%" alt="Image">
+            <p>Par le vendeur XXX</p>    
+          </div>
 
-    <div class="col-sm-8 text-left"> 
-      <h1>Voici l'ensemble des articles présents sur le site</h1>
-      
-
-
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+          <div class="col-sm-4 text-center"> 
+            <img src="paques2.jpg" style="width:100%" alt="Image">
+            <p>Par le vendeur XXX</p>    
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
+<!-- FIN DE L'AFFICHAGE DES IMAGES -->
 
 
 
+<!-- FOOTER DEBUT -->  
 <footer class="page-footer">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-12">
         <h6 class="text-uppercase font-weight-bold">Informations additionnelles</h6>
       </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-12">
-      <h6 class="text-uppercase font-weight-bold">Contact</h6>
-      <p>
-        37, quai de Grenelle, 75015 Paris, France (ou à domicile actuellement à cause du COVID-19<br />
-        noor.kardache@edu.ece.fr || tiffanie.jego-ragas@edu.ece.fr<br />
-        +33 06 93 03 04 05 <br/>
-        +33 06 92 02 05 04
-      </p>
+  
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+      </div>
     </div>
   </div>
-  
-  <div class="footer-copyright text-center">&copy; 2020 Copyright | Droit d'auteur : Noor&Tiffanie + nos précieuses sources</div>
+    
+  <div class="footer-copyright text-center">&copy; 2020 Copyright | Droit d'auteur: Noor&Tiffanie + nos précieuses sources</div>
 </footer>
+<!-- FOOTER FIN --> 
 
 </body>
 
