@@ -89,6 +89,15 @@ border-radius: 5px ;
     background-color: #625E70 !important;
 }
 
+.alert-info{
+    color: #007078 !important;
+    margin-bottom: 0;
+}
+.alert-info :hover{
+    color: black;
+}
+
+
 .collapse .navbar-collapse ul{
     margin: 0px !important;
     justify-content: flex-end;
