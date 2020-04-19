@@ -289,6 +289,14 @@ text-decoration: none;
   height: auto;
   display: block;
 }
+.carousel-wrapper video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  overflow: hidden;
+}
+
 
 .carousel-wrapper h3 {
   opacity: 0;
