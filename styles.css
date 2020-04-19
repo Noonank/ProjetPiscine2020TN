@@ -102,10 +102,24 @@ border-radius: 5px ;
     margin: 0px !important;
     justify-content: flex-end;
 }
+
+#myCarousel{
+    height:550px;
+    overflow: hidden;
+    align-content: center;
+    vertical-align: top;
+}
 .carousel-inner img {
     width: 100%; /* Set width to 100% */
-    margin: auto;
-    min-height:200px;
+    display: flex;
+    align-self: center !important;
+    vertical-align: center;
+    flex-wrap: wrap;
+}
+
+.carousel-caption{
+    top:330px;
+    bottom: auto;
 }
 
 /* Hide the carousel text when the screen is less than 600 pixels wide */
