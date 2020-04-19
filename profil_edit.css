@@ -1,0 +1,65 @@
+.middle-col{
+    opacity: 0.2;
+    content: "Mise en page default";
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    border-radius: 2px;
+}
+  #text{
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: black;
+    float:center;
+  }
+
+
+.profile-avatar .file {
+    overflow: hidden;
+    position: relative;
+    width: inherit;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+    margin-top: calc(200px - 2.5em);
+    height: 2.5em;
+    margin-left: calc(8px - 1ex);
+}
+
+.file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    display: block;
+}
+
+.btn-file {
+    display:block;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+    
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

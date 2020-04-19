@@ -65,11 +65,36 @@ border-radius: 5px ;
     -webkit-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);transition:all ease 0.8s;
     -moz-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
-    
-    
     border-radius: 0;
     border-width: 1px;
 }
+
+#nav_bar_2 li {
+    margin-left: 14px;
+  
+  }
+
+  #myNavbar #panier_grp span {
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    left: -7px;
+    bottom: -7px;
+    padding-top: 3px;
+    border-radius: 50px;
+    background: #414141;
+    font-size: 12px;
+    color: #fff;
+}
+#nav_bar_2 li  a 
+{
+    color: #cc7161 !important;  
+  
+}
+ul {
+    color: #007078;
+  }
+
 #myNavbar{
     background-color: #ccc;
     margin: 0em ;
@@ -102,6 +127,11 @@ border-radius: 5px ;
     margin: 0px !important;
     justify-content: flex-end;
 }
+.active_onglet{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    }
+    
 
 #myCarousel{
     height:550px;
@@ -258,7 +288,32 @@ border-radius: 5px ;
         min-height: 75vh;
     }
 
+    .card_cat {
+        width: 100%;
+        padding: 0px;
+        border-color: #666;
+        border: 0;
+        border-radius: 3px;
+        border-color: #666 !important;
+        background-color: whitesmoke;
+        display: inline-block !important;
+
+    }
+    .card_cat img{
+    margin auto;
+    width: 100%;
+      overflow: hidden;
+    }
+
+    .carteborder {
+        -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     
+        }   
+
+
+
     hr.style1{
         border-top: 1px solid #8c8b8b;
     }

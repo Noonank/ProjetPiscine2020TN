@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="categories.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
  
     <link href="form-validation.css" rel="stylesheet">
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -111,15 +111,18 @@
 
       <main class="page-content">
         <div class="col-sm-2" ></div>
-            <div class="col-sm-8 text-left">     
-              <h1>Voici l'ensemble des articles présents sur le site</h1>   
+          <div class="col-sm-8 text-left">     
+            <h1>Voici l'ensemble des articles présents sur le site</h1>   
 
-              <!-- AFFICHAGE DES IMAGES : 3 IMAGES PAR LIGNE ET INFORMATION SUR LE NOM DU VENDEUR -->
-              <div class="col-lg-4 col-md-6 mb-4">
+            <!-- AFFICHAGE DES IMAGES : 3 IMAGES PAR LIGNE ET INFORMATION SUR LE NOM DU VENDEUR -->
+            <div class="col-lg-4 col-md-6 mb-4">
+              
 
-              <div class="carteborder">
-              <div class="card "  >
-                  <a href="#"><img class="card-img-top" alt="image"></a>
+
+              <div class="carteborder text-center">
+              <div class="card_cat">
+                  <a href="#"><img class="card-img-top" alt="image" src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
+                  </a>
                   <div class="card-body">
                     <h4 class="card-title">
                       <a href="#">Nom de l'article</a>
@@ -127,15 +130,18 @@
                     <h5>Prix de l'article</h5>
                     <p class="card-text">Description de l'article </p>
                     
-                      <button class="btn btn-primary" type="submit">Acheter</button>
-                      <button class="btn btn-primary" type="submit">Panier</button>
+                      <button class="btn btn-primary-light" type="submit">Acheter</button>
+                      <button class="btn btn-primary-light" type="submit">Panier</button>
 
         
         
                 </div>
               </div>
-            </div> 
-             </div>
+              </div> 
+            </div>
+            <!-- FIN DE L'AFFICHAGE DES IMAGES -->
+          </div>
+            
         <!-- FIN DE L'AFFICHAGE DES IMAGES -->
       </main>
 
