@@ -1,0 +1,357 @@
+html {
+  font-family: "proxima-nova",sans-serif;
+}
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, html a {
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.col-sm .row{
+  border:2px solid #f2f2f2;
+  background-color:#ffffff !important;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+/* ==== */
+.site-header {
+  height: 44px;
+  width: 100%;
+  border-bottom: 1px solid #E1e1e1;
+}
+.user-info {
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);transition:all ease 0.8s;
+  -moz-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.75);
+	border-radius: 3px;
+	background: #e7e7e7;
+	padding: 5px;
+}
+.cover-photo {
+  width: 100%;
+  height: 250px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  position: relative;
+  z-index: 1;
+  background-image: url(http://placekitten.com/980/250);
+  background-size: cover;
+}
+
+.cover-back{
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);transition:all ease 0.8s;
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+
+  width: 100%;
+  height: 252px;
+  background-color: #666;
+  border-radius: 1px;
+  float: left;
+}
+
+.body-contenu {
+  margin-top: 260px;
+  padding:0  4px ;
+  width: 100%;
+  z-index: 4;
+  position: relative;
+}
+
+.left-col{
+  width: 220px;
+  float: left;
+  min-height:100%;
+  margin-right: 5px;
+  position: relative;
+  top: -150px;
+  left: 5px;
+}
+
+
+.middle-col {
+  width: calc(100% - 220px);
+  float: right;
+  min-height:100%;
+  position: relative;
+}
+
+
+
+
+
+
+/* LEFT COL */
+.user-info h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding-top: 4px;
+}
+.user-info h2 {
+  color: #666;
+  font-size: 16px;
+}
+.user-info .meta {
+  font-size: 14px;
+}
+.user-info .meta p {
+  line-height: 1.6;
+}
+.user-info .meta i {
+  font-size: 0.95em;
+}
+
+.profile-avatar {
+  width: 210px;
+  height: 210px;
+  border: 1px solid #666;
+  background-color: #666;
+  border-radius: 5px;
+  float: left;
+}
+.profile-avatar .inner {
+ width: 200px;
+ height: 200px;
+  margin: 4px;
+  background-image: url(http://placekitten.com/220/220);
+}
+
+/* CENTER */
+
+.card {
+  width: 49%;
+  border: 1px;
+  border-radius: 3px;
+  border-color: #666 !important;
+  background-color: whitesmoke;
+  display: inline-block !important;
+  margin: 1px;
+   }
+
+  .coupon-box-1 > .card {
+    width: 30%;
+    border: 0;
+    border-radius: 3px;
+    border-color: #666 !important;
+    background-color: whitesmoke;
+    display: inline-block !important;
+
+     }
+.card img{
+  margin-left: auto;
+    margin-right: auto;
+  height: 200px;
+  overflow: hidden;
+}
+.card-body {padding: .5rem 0; font-size: 14px;}
+.card-title small {font-size: 14px; font-weight: 200;}
+.card-text del {font-weight: 200;}
+.card-img-overlay i {
+  font-weight: normal}
+
+.btn {  line-height: 1;
+  margin: 2px;
+ }
+
+ .coupon-box-1 >.right-col{
+  width: 69%;
+  float: right;
+  min-height:100%;
+  border-radius: 3px;
+background: #e7e7e7;
+padding: 25px;
+}
+
+.coupon-box-1 >.right-col h3 {
+font-size: 19px;
+  color: #3c3c3c;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.coupon-box-1 >.right-col  table {
+  width: 100%;
+  color: #000000;
+}
+
+.round-fin-btn {
+  border-radius: 20px;
+  font-size: 17px;
+  background: #dc9770;
+  color: #fff;
+  display: inline-block;
+  border: solid 2px #dc9770; 
+  transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+  margin: 2ex;
+  float:right;
+  padding: 8px 12px;
+
+}
+.round-fin-btn-crea {
+  border-radius: 20px;
+  font-size: 15px;
+  background: #dc9770;
+  color: #fff;
+  display: inline-block;
+  border: solid 2px #dc9770; 
+  transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+  margin: 1em;
+  float: right;
+  padding: 8px 12px;
+}
+
+.round-fin-btn:hover,
+.round-fin-btn:focus,
+.round-fin-btn-crea:hover,
+.round-fin-btn-crea:focus {
+background: transparent;
+color: rgb(211, 58, 58);
+text-decoration: none;
+}
+
+
+.image-grid {
+  width: 100%;
+}
+
+.profile-nav {
+  height: 46px;
+  background-color: whitesmoke;
+  border-bottom: 2px solid #E1E1E1;
+  margin-bottom: 8px;
+}
+.profile-nav ul > li {
+  color: #999;
+  font-size: 14px;
+  float: left;
+  line-height: 44px;
+  font-weight: 600;
+  padding: 0 22px;
+  cursor: pointer;
+}
+.profile-nav li.active {
+  color: #1E1E1E;
+}
+
+.user-info .nav-item .nav-link {
+  width: 210px;
+  display: block;
+  margin: auto;
+}
+
+.content .unit {
+  padding: 8px 0 10px 0;
+  border-bottom: 2px solid #E1E1E1;
+  margin-bottom: 8px;
+}
+.content .unit:last-child {
+  margin-bottom: 16px;
+}
+.content .unit h3 {
+  margin-bottom: 4px;
+  color: #777;
+}
+.content .unit h3 a {
+  color: #1e1e1e;
+  font-weight: 600;
+}
+.content .unit p.time {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.content .unit .more {
+  font-size: 14px;
+  color: #777;
+}
+.content .unit .more a {
+  color: #777;
+}
+
+
+
+.carousel-wrapper img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.carousel-wrapper video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  overflow: hidden;
+}
+
+
+.carousel-wrapper h3 {
+  opacity: 0;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-height: 310px ;
+  margin: auto;
+  background-color: #FFFFFF;
+  background-image: linear-gradient(rgb(245, 247, 252) 10%, #F0F3FC 40%);
+  box-shadow: 0px 2px 39px -19px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+.carousel-wrapper .carousel {
+  width: 100%;
+  height: inherit;
+}
+.carousel-wrapper .carousel .carousel-cell {
+  width: 100%;
+  height: 310px;
+  max-width: 100%;
+  transition: transform 500ms ease;
+}
+.carousel-wrapper .carousel .carousel-cell .more {
+  margin-top: 0;
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  color: #CFCFCF;
+  text-decoration: none;
+  transition: opacity 300ms ease;
+}
+.carousel-wrapper .carousel .carousel-cell .more:hover, .carousel-wrapper .carousel .carousel-cell .more:active, .carousel-wrapper .carousel .carousel-cell .more:visited, .carousel-wrapper .carousel .carousel-cell .more:focus {
+  color: #CFCFCF;
+  text-decoration: none;
+}
+.carousel-wrapper .carousel .carousel-cell.is-selected {
+  transform: scale(1.2);
+}
+.carousel-wrapper .carousel .carousel-cell.is-selected .line {
+  height: 35px;
+}
+.carousel-wrapper .flickity-page-dots {
+  display: none;
+}
+.carousel-wrapper .flickity-viewport, .carousel-wrapper .flickity-slider {
+  overflow: visible;
+}
+.carousel-control { color: #007078;}
+   
+.carousel-control:hover, .carousel-control:focus, .carousel-control:active { color: #333; }
+
+

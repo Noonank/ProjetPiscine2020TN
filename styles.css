@@ -317,8 +317,12 @@ a {
     padding: 5px ;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15)!important; 
     margin-top:0px !important; 
+<<<<<<< HEAD
     width:100% !important; 
     min-width: 180px;
+=======
+    min-width:200px !important; 
+>>>>>>> f37a4dd98a90b0989e0dbe4a98a60d8399ac5501
 }
 
 #pop-up-notif{
