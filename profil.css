@@ -88,11 +88,6 @@ a {
   position: relative;
 }
 
-
-
-
-
-
 /* LEFT COL */
 .user-info h1 {
   font-size: 24px;
@@ -326,13 +321,14 @@ text-decoration: none;
   transition: transform 500ms ease;
 }
 .carousel-wrapper .carousel .carousel-cell .more {
+  self
   margin-top: 0;
   display: block;
   text-align: center;
   font-size: 10px;
   color: #CFCFCF;
-  text-decoration: none;
-  transition: opacity 300ms ease;
+  text-decoration : none;
+  transition : opacity 300ms ease;
 }
 .carousel-wrapper .carousel .carousel-cell .more:hover, .carousel-wrapper .carousel .carousel-cell .more:active, .carousel-wrapper .carousel .carousel-cell .more:visited, .carousel-wrapper .carousel .carousel-cell .more:focus {
   color: #CFCFCF;
