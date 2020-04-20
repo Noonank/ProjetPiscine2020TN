@@ -26,52 +26,52 @@
         <script type="text/javascript">
         
         $(document).ready(function(){
-        $('.header').height($(window).height());
-        });
-        $(document).ready(function() {
-    document.getElementById('pro-image').addEventListener('change', readImage, false);
-    
-    $( ".preview-images-zone" ).sortable();
-    
-    $(document).on('click', '.image-cancel', function() {
-        let no = $(this).data('no');
-        $(".preview-image.preview-show-"+no).remove();
-    });
-});
-
-var num = 4;
-function readImage() {
-    if (window.File && window.FileList && window.FileReader) {
-        var files = event.target.files; //FileList object
-        var output = $(".preview-images-zone");
-
-        for (let i = 0; i < files.length; i++) {
-            var file = files[i];
-            if (!file.type.match('image')) continue;
-            
-            var picReader = new FileReader();
-            
-            picReader.addEventListener('load', function (event) {
-                var picFile = event.target;
-                var html =  '<div class="preview-image preview-show-' + num + '">' +
-                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
-                            '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
-                            '</div>';
-
-                output.append(html);
-                num = num + 1;
+            $('.header').height($(window).height());
             });
+        $(document).ready(function() 
+            {
+            document.getElementById('pro-image').addEventListener('change', readImage, false);
+            
+            $( ".preview-images-zone" ).sortable();
+            
+            $(document).on('click', '.image-cancel', function() 
+            {
+                let no = $(this).data('no');
+                $(".preview-image.preview-show-"+no).remove();
+            });
+        });
 
-            picReader.readAsDataURL(file);
+        var num = 4;
+        function readImage() {
+            if (window.File && window.FileList && window.FileReader) {
+                var files = event.target.files; //FileList object
+                var output = $(".preview-images-zone");
+
+                for (let i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (!file.type.match('image')) continue;
+                    
+                    var picReader = new FileReader();
+                    
+                    picReader.addEventListener('load', function (event) {
+                        var picFile = event.target;
+                        var html =  '<div class="preview-image preview-show-' + num + '">' +
+                                    '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                                    '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
+                                    '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
+                                    '</div>';
+
+                        output.append(html);
+                        num = num + 1;
+                    });
+
+                    picReader.readAsDataURL(file);
+                }
+                $("#pro-image").val('');
+            } else {
+                console.log('Browser not support');
+            }
         }
-        $("#pro-image").val('');
-    } else {
-        console.log('Browser not support');
-    }
-}
-
-
         </script>
     </head>
     
@@ -86,7 +86,7 @@ function readImage() {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/accueil.html#">
+                            <a class="navbar-brand" href="profil.html">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
@@ -96,9 +96,7 @@ function readImage() {
                                 <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
-                               
-          
+                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>     
                                 <li class="nav-item  hidden-xs" >
                                     <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -108,9 +106,9 @@ function readImage() {
                                     </div>    
           
                                 </li>           
-                                <li class="nav-item hidden-xs disabled">
-                                    <a class="nav-link">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier" ></i>    
+                                <li class="nav-item hidden-xs">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></i>    
                                     </a>
                                 </li> 
                                 <li class="nav-item visible-xs" >
@@ -162,7 +160,7 @@ function readImage() {
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class="nav-item">
                                                     <a class=" text-center nav-link" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/profil-edition.html" >
-                                                    <i class="fa fa-key"></i> Editer Profile
+                                                    <i class="fa fa-key"></i> Editer Profil
                                                     </a>
                                                 </li>
                                             </ul><!--nav-tabs close-->
@@ -175,100 +173,97 @@ function readImage() {
                                                 <div class="middle-col">
                                         
                                                          <!-- Categorie-->
-                                                    <div class="form-group text-center">
-                                                        <h3 class="text-center">Nouvel Article</h3>
+                                                    <form class="form-horizontal needs-validation"  method="POST" action="" enctype="multipart/form-data">
+                                                        <div class="form-group text-center">
+                                                            <h3 class="text-center">Nouvel Article</h3>
 
-                                                        <table class="table table-dark table-hover text-center">
-                                    
-                                                            <tbody>
-                                                              <tr>
-                                                                <td><label class="control-label" for="numid">Numero d'identification:</label></td>
-                                                                <td><input id="numid" name="numid" type="number" 
-                                                                        class="form-control"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td><label class="control-label" for="nom_art">Nom:</label></td>
-                                                                <td><input id="nom_art" name="nom_art" type="text"
-                                                                    class="form-control"></td>                                                            
-                                                              </tr>
-                                                              <tr>
-                                                                <td><a href="javascript:void(0)" onclick="$('#pro-image').click()">
-                                                                <br><span class="fas fa-text">Ajouter Photos:</span> </a>
-                                                            <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple></td>
-                                                                <td>
-                                                                    <div class="preview-images-zone">
-                                                                        <div class="preview-image preview-show-1">
-                                                                            <div class="image-cancel" data-no="1">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
+                                                            <table class="table table-dark table-hover text-center">                  
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="Pseudo_vendeur">Veuillez saisir votre pseudo vendeur:</label></td>
+                                                                    <td><input id="Pseudo_vendeur" type="text" class="form-control" name="Pseudo_vendeur" ></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="num_id">Numero d'identification:</label></td>
+                                                                    <td><input id="num_id" type="number" class="form-control" name="num_id" ></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="Nom">Nom:</label></td>
+                                                                    <td><input id="Nom" type="text" class="form-control" name="Nom"></td> 
+                                                                </tr>  
+                                                                <tr>
+                                                                    <td><a href="javascript:void(0)" onclick="$('#Photo').click()">
+                                                                    <br><span class="file btn btn-lg btn-primary-light">Ajouter Photos:</span> </a>
+                                                                        <input type="file" id="Photo" style="display: none;" class="form-control" name="Photo"></td>                                                    
+                                                                    <td>
+                                                                        <div class="preview-images-zone">
+                                                                            <div class="preview-image preview-show-1">
+                                                                                <div class="image-cancel" data-no="1">x</div>
+                                                                                <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
+                                                                                <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
+                                                                            </div>
+                                                                            <div class="preview-image preview-show-2">
+                                                                                <div class="image-cancel" data-no="2">x</div>
+                                                                                <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
+                                                                                <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
+                                                                            </div>
+                                                                            <div class="preview-image preview-show-3">
+                                                                                <div class="image-cancel" data-no="3">x</div>
+                                                                                <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
+                                                                                <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="preview-image preview-show-2">
-                                                                            <div class="image-cancel" data-no="2">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
-                                                                        </div>
-                                                                        <div class="preview-image preview-show-3">
-                                                                            <div class="image-cancel" data-no="3">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-            
-                                                                </td>                                                                
-                                                              </tr>
-                                                              <tr>
-                                                                <td><label class="control-label" for="description">Description:</label></td>
-                                                                <td><textarea class="form-control" id="description" rows="3" placeholder="Qualité et Défault"></textarea></td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td><label class="control-label" for="prix">Prix:</label></td>
-                                                                <td><input type="number" class="form-control" id="prix" placeholder="220€"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td><label class="control-label" for="mdpa">Categorie:</label></td>
-                                                                <td class="text-center"><input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="credit">Ferraille ou Trésor</label>
-                                                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="credit">Bon pour le Musée</label>
-                                                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                                                                    <label class="custom-control-label" for="debit">Accessoire VIP</label></td>
-                                                              </tr>
-                                                            <tr id="video">
-                                                                <td><label class="control-label" for="video">Video:</label></td></td>
-                                                                <td>
-                                                                  <span class="btn btn-default btn-file">
-                                                                      Ajouter une video en mp4 <input type="file">
-                                                                  </span>                                                                        
-                                                                  <input type="text" class="form-control" placeholder="veuillez copier colller le lien de votre vidéo">
-                                                               </td>
-                                                            </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                            
-                                                    </div>  
-                                                   
-
-                                                                                          
-                                                    <a href="#" class="fin round-fin-btn-crea" title="">
-                                                        <i class="fa fa-times"></i> Annuler
-                                                    </a>
-                                                    <a href="#" class="fin round-fin-btn-crea" title="">
-                                                        <i class="fa fa-check"></i> Valider
-                                                    </a>
-                                                    
+                                                                        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                                                                    </td>                                                                
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="Nom">Description:</label></td>
+                                                                    <td><input id="Description" type="text" class="form-control" name="Description" placeholder="Qualité et Défault"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="Prix">Prix:</label></td>
+                                                                    <td><input type="number" class="form-control" id="Prix" placeholder="220€" name="Prix"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label class="control-label" for="cat">Categorie:</label></td>
+                                                                    <td class="text-center">
+                                                                        <input id="fer" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
+                                                                        <label class="custom-control-label " for="fer">Ferraille ou Trésor</label>
+                                                                        <input id="mus" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
+                                                                        <label class="custom-control-label " for="mus">Bon pour le Musée</label>
+                                                                        <input id="access" name="Categorie" type="radio" class="custom-control-input" required="">
+                                                                        <label class="custom-control-label" for="access">Accessoire VIP</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="video">
+                                                                    <td><label class="control-label" for="video">Video:</label></td></td>
+                                                                    <td>
+                                                                    <span class="btn btn-default btn-file">
+                                                                        Ajouter une video en mp4 <input type="file">
+                                                                    </span>                                                                        
+                                                                    <input type="text" class="form-control" placeholder="veuillez copier coller le lien de votre vidéo" name="Video">
+                                                                </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                
+                                                        <a href="#" class="fin round-fin-btn-crea" title="">
+                                                            <i class="fa fa-times"></i> Annuler
+                                                        </a>
+                                                        <div class="fin round-fin-btn-crea">
+                                                            <i class="fa fa-check"></i> 
+                                                        <input type="submit" name="formulaireajoutitem" value="Valider">
+                                                        </div>
+                                                        </div>                                      
+                                                    </form>                                                                                            
                                                 </div>
-                                            </div>                                       
-
+                                            </div>                                      
                                         </section>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
                 </div>
             </main>
 

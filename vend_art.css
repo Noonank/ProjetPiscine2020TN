@@ -11,6 +11,11 @@
     float: right;
     padding: 8px 12px;
   }
+
+  .round-fin-btn-crea input{
+    background-color: transparent;
+    border: transparent;
+  }
   
   .round-fin-btn-crea:hover,
   .round-fin-btn-crea:focus {
@@ -94,6 +99,12 @@
   border-color: #666;
   border-radius: 3px;
   padding-top: 1px;
+  margin-left: 1em;
+}
+
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 
@@ -115,7 +126,6 @@
   filter: alpha(opacity=0);
   opacity: 0;
   outline: none;
-  background: white;
   cursor: inherit;
   display: block;
 }

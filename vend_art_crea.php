@@ -168,15 +168,17 @@ session_start();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/CreaCompteVend.html#">
+                            <a class="navbar-brand" href="profil.html">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a class="nav-link" href="#"title="Vendre">Vendre</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Votre compte">Votre compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
                                 <li class="nav-item  hidden-xs" >
                                     <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -278,7 +280,6 @@ session_start();
                                             <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?></h2>
                                             <h2>email : <?php echo $infovendeur['email']; ?></h2><br>
                                         </section>
-
                                         <section class="section content">
                                             <div class="container-fluid">
                                                 <div class="middle-col">
@@ -288,7 +289,6 @@ session_start();
                                                     <div class="form-group text-center">
                                                         <h3 class="text-center">Nouvel Article</h3>
                                                         
-
                                                         <table class="table table-dark table-hover text-center">
                                                             <tbody>
                                                             <tr>
@@ -302,12 +302,10 @@ session_start();
                                                             <tr>
                                                                 <td><label class="control-label" for="Nom">Nom:</label></td>
                                                                 <td><input id="Nom" type="text" class="form-control" name="Nom"></td>                                                       
-                                                            </tr>
-
-                                                            
+                                                            </tr>  
                                                             <tr>
                                                                 <td><a href="javascript:void(0)" onclick="$('#Photo').click()">
-                                                                <br><span class="file btn btn-lg btn-primary">Ajouter Photos:</span> </a>
+                                                                <br><span class="file btn btn-lg btn-primary-light">Ajouter Photos:</span> </a>
                                                                     <input type="file" id="Photo" style="display: none;" class="form-control" name="Photo"></td>
                                                                 <td>
                                                                     <div class="preview-images-zone">
@@ -339,13 +337,15 @@ session_start();
                                                                 <td><input type="number" class="form-control" id="Prix" placeholder="220€" name="Prix"></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><label class="control-label" for="mdpa">Categorie:</label></td>
-                                                                <td class="text-center"><input id="Categorie" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="credit">Ferraille ou Trésor</label>
-                                                                    <input id="credit" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="credit">Bon pour le Musée</label>
-                                                                    <input id="debit" name="Categorie" type="radio" class="custom-control-input" required="">
-                                                                    <label class="custom-control-label" for="debit">Accessoire VIP</label></td>
+                                                                <td><label class="control-label" for="cat">Categorie:</label></td>
+                                                                <td class="text-center">
+                                                                <input id="fer" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
+                                                                    <label class="custom-control-label " for="fer">Ferraille ou Trésor</label>
+                                                                    <input id="mus" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
+                                                                    <label class="custom-control-label " for="mus">Bon pour le Musée</label>
+                                                                    <input id="access" name="Categorie" type="radio" class="custom-control-input" required="">
+                                                                    <label class="custom-control-label" for="access">Accessoire VIP</label>
+                                                                </td>
                                                             </tr>
                                                             <tr id="video">
                                                                 <td><label class="control-label" for="video">Video:</label></td></td>
@@ -353,7 +353,7 @@ session_start();
                                                                   <span class="btn btn-default btn-file">
                                                                       Ajouter une video en mp4 <input type="file">
                                                                   </span>                                                                        
-                                                                  <input type="text" class="form-control" placeholder="veuillez copier colller le lien de votre vidéo" name="Video">
+                                                                  <input type="text" class="form-control" placeholder="veuillez copier coller le lien de votre vidéo" name="Video">
                                                                </td>
                                                             </tr>
                                                             </tbody>
@@ -362,13 +362,12 @@ session_start();
                                                         <a href="#" class="fin round-fin-btn-crea" title="">
                                                             <i class="fa fa-times"></i> Annuler
                                                         </a>
-
-                                                        <div class="modal-footer">
+                                                        <div class="fin round-fin-btn-crea">
+                                                            <i class="fa fa-check"></i> 
                                                             <input type="submit" name="formulaireajoutitem" value="Valider">
                                                         </div>
                                                     </div>
                                                     </form>                                                                                          
-                                                   
                                                 </div>
                                             </div>
                                         </section>

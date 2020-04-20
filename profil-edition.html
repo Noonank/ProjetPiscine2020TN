@@ -33,6 +33,7 @@
     
     <body>
         <div class="page">
+            <header class="page-header">
             <nav id="nav_bar" class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -41,8 +42,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                         </button>
-                        <a class="navbar-brand" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/accueil.html#">
-                        <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
+                        <a class="navbar-brand" href="profil.html">
+                            <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                         </a>    
                     </div>
             
@@ -52,8 +53,6 @@
                             <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
-                           
-      
                             <li class="nav-item  hidden-xs" >
                                 <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                     <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -107,7 +106,8 @@
                                             <div class="cover-photo"></div>
                                         </div>
                                         <div class="body-contenu">
-                                        <section class="text-center left-col user-info">
+                                            <form method="POST" action="" enctype="multipart/form-data">
+                                                <section class="text-center left-col user-info">
                                             <div class="profile-avatar">
                                                 <div class="inner">
                                                 <span class="file btn btn-lg btn-primary">
@@ -127,7 +127,7 @@
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class=" text-center nav-item">
                                                     <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
-                                                    <i class="fa fa-check"></i> Valider le Profile
+                                                    <i class="fa fa-check"></i><input type="submit" value="Valider le profil"> 
                                                     </a>
                                                     <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
                                                         <i class="fa fa-times"></i> Annuler
@@ -135,10 +135,9 @@
                                                     
                                                 </li>
                                             </ul><!--nav-tabs close-->
-                                            
-
-
                                         </section>
+                                    </form>
+
                                         <section class="section content">
                                             <div class="container-fluid">
                                                 <div class="middle-col">

@@ -1,4 +1,61 @@
-<!DOCTYPE html>
+<?php
+//session_start();
+
+
+$database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
+$database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
+
+
+
+//déclaratio des variables pour récupérer la valeur des 2 pseudos
+$recherchepseudo = $database->prepare("SELECT * FROM identificationvendeurs WHERE Pseudo = ? ");
+$recherchepseudo->execute(array($Pseudo));
+$pseudotrouve = $recherchepseudo->rowCount();
+
+$recherchepseudo_vendeur = $database_items->prepare("SELECT * FROM identificationitems WHERE Pseudo_vendeur = ? ");
+$recherchepseudo_vendeur->execute(array($Pseudo_vendeur));
+$pseudo_vendeurtrouve = $recherchepseudo_vendeur->rowCount();                   
+
+//si les pseudos comparés sont les mêmes 
+if($pseudotrouve == $pseudo_vendeurtrouve)
+{
+
+
+if(isset($_GET['Pseudo']))
+{
+    $Pseudo = htmlspecialchars($_GET['Pseudo']);
+    $connexionvendeur = $database->prepare('SELECT * FROM identificationvendeurs WHERE Pseudo = ?');
+    $connexionvendeur->execute(array($Pseudo));
+
+    $infovendeur = $connexionvendeur->fetch();
+
+    $Photo = $_GET['Photo'];    
+    $connexionitem = $database_items->prepare('SELECT * FROM identificationitems WHERE Photo = ?');
+    $connexionitem->execute(array($Photo));
+    $infoitem = $connexionitem->fetch();
+
+    if(isset($_GET['Photo']))
+    {
+
+        echo "recuo photo ok";
+    }
+    else
+    {
+        echo "erreur recup photo";
+    }
+}
+else
+{
+    echo "erreur recup pseudo";
+}
+
+?>
+
+
+
+
+
+
 <html>
     <head>
         <link rel="icon" href="Icon.ico">
@@ -52,7 +109,7 @@
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
@@ -63,11 +120,11 @@
                                     <div class="dropdown-menu" id="pop-up-notif" aria-labelledby="dropdownMenuLink">
                                         <p>Vous n'avez aucune notification</p>
                                     </div>    
-          
+
                                 </li>           
                                 <li class="nav-item hidden-xs disabled">
                                     <a class="nav-link">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></i>    
+                                        <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></i>       
                                     </a>
                                 </li> 
                                 <li class="nav-item visible-xs" >
@@ -78,7 +135,7 @@
                                     <div class="dropdown-menu-notif" aria-labelledby="dropdownMenuLink">
                                         <p>Vous n'avez aucune notification</p>
                                     </div>    
-          
+
                                 </li>           
                                 <li class="nav-item visible-xs">
                                     <a class="nav-link" href="#">
@@ -90,6 +147,35 @@
                         </div>
                     </div>
                 </nav>
+
+                <nav id="nav_bar_2"class="navbar navbar-expand-md">
+                    <div class="container-fluid">
+                        <div class="navbar-header-2">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item dropdown position-static">
+                                    <a class="nav-link dropdown-toggle" href="#"title="Achat"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Achat</a>
+                                    <div class="dropdown-menu mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
+                                        <a class="nav-link dropdown-item" href="#"title="Vendre">Vendre</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="nav-link dropdown-item" href="#" title="Votre compte">Votre compte</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown position-static">
+                                    <a class="nav-link dropdown-toggle" href="#"title="Categorie"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégorie</a>
+                                    <div class="dropdown-menu  mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
+                                        <a class="nav-link dropdown-item" href="#"title="FoT">Ferraille ou Trésor</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="nav-link dropdown-item" href="#" title="Bplm">Bon pour le musée</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="nav-link dropdown-item" href="#" title="aVIP">Accessoir VIP</a>
+                                    </div>    
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
 
             </header>
 
@@ -116,8 +202,8 @@
                                                 </a>
                                             </li>
                                         </ul><!--nav-tabs close-->
-                                        <h1>Willabelle Ong</h1>
-                                        <h2>pseudo: @lilou</h2>
+                                        <h1>Nom : <?php echo $infovendeur['Nom']; ?></h1>
+                                        <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?></h2>                                       
                                     </section>
                                     <section class="section content">
                                         <div class="container-fluid">
@@ -128,29 +214,21 @@
                                                         
                                                         <div class="carousel-wrapper">
                                                             <div class="carousel" data-flickity>
-                                                                <div class="carousel-cell">
-                                                                    <h3>Product 1</h3>
-                                                                    <a class="more" href="">Explore more</a>
-                                                                    <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-                                                                </div>
-                                                                <div class="carousel-cell">
-                                                                    <h3>Product 2</h3>
-                                                                    <a class="more" href="">Explore more</a>
-                                                                    <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-                                                                </div>
-                                                                <div class="carousel-cell">
-                                                                    <h3>Product 3</h3>
-                                                                    <a class="more" href="">Explore more</a>
-                                                                    <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
-                                                                </div>
-                                                                <div class="carousel-cell ">
-                                                                    <h3>Video presentation</h3>
-                                                                    <a class="more" href="">Explore more</a>
-
-                                                                    <video class="video-fluid" autoplay loop muted>
-                                                                        <source src="https://mdbootstrap.com/img/video/Lines.mp4" type="video/mp4" />
-                                                                      </video>         
-                                                                          </div>
+                                                            <div class="carousel-cell">
+                                                                <h3>Product 1</h3>
+                                                                <a class="more" href="">Explore more</a>                                                                
+                                                                <img src ="<?php echo $infoitem['Photo']; ?>">
+                                                            </div>
+                                                            <div class="carousel-cell">
+                                                                <h3>Product 2</h3>
+                                                                <a class="more" href="">Explore more</a>
+                                                                <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
+                                                            </div>
+                                                            <div class="carousel-cell">
+                                                                <h3>Product 3</h3>
+                                                                <a class="more" href="">Explore more</a>
+                                                                <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
+                                                            </div>
                                                             </div>                                                          
 
                                                         </div>

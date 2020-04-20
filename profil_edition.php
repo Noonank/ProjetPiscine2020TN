@@ -95,17 +95,19 @@ session_start();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/CreaCompteVend.html#">
+                            <a class="navbar-brand" href="profil.html">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a class="nav-link" href="#"title="Vendre">Vendre</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Votre compte">Votre compte</a></li>
-                                <li class="nav-item  hidden-xs" >
-                                    <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
+                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item  hidden-xs" >
+                            <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
                                     </a>
                                     <div class="dropdown-menu" id="pop-up-notif" aria-labelledby="dropdownMenuLink">
@@ -113,9 +115,9 @@ session_start();
                                     </div>    
 
                                 </li>           
-                                <li class="nav-item hidden-xs">
-                                    <a class="nav-link" href="#">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></i>       
+                                <li class="nav-item hidden-xs disabled">
+                                    <a class="nav-link">
+                                    <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier" ></i>    
                                     </a>
                                 </li> 
                                 <li class="nav-item visible-xs" >
@@ -174,7 +176,7 @@ session_start();
                         <div class="alert alert-info alert-dismissable">
                             <a class="panel-close close" data-dismiss="alert">×</a> 
                             <i class="fa fa-key"></i>
-                            Editer votre profil.
+                            Editez votre profil.
                           </div>
                         <div class="col-sm ">
                             <div class="cart-wrap">
@@ -206,8 +208,7 @@ session_start();
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class=" text-center nav-item">
                                                     <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
-                                                    <input type="submit" value="Valider le profil">
-                                                    <!-- <i class="fa fa-check"></i> Valider le Profil -->
+                                                    <i class="fa fa-check"></i><input type="submit" value="Valider le profil"> 
                                                     </a>
                                                     <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
                                                         <i class="fa fa-times"></i> Annuler
