@@ -321,7 +321,6 @@ text-decoration: none;
   transition: transform 500ms ease;
 }
 .carousel-wrapper .carousel .carousel-cell .more {
-  self
   margin-top: 0;
   display: block;
   text-align: center;

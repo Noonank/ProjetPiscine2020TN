@@ -12,7 +12,6 @@
     color: black;
     float:center;
   }
-
   .navbar-nav input{
     background-color: transparent;
     border: transparent;
@@ -22,7 +21,8 @@
     margin-right: 0;
     margin-left: 0;
   }
-.profile-avatar .file {
+
+  .profile-avatar .file {
     overflow: hidden;
     position: relative;
     width: inherit;
@@ -47,7 +47,6 @@
     outline: none;
     display: block;
     background: transparent;
-
 }
 
 .btn-file {

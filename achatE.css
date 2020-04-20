@@ -205,8 +205,19 @@ font-size: 19px;
   border: solid 2px #dc9770; 
   transition: all 0.5s ease-in-out 0s;
   cursor: pointer;
-  margin: 1em;
-  float: right;
+  margin: 1em;  
+  padding: 8px 12px;
+}
+.round-fin-btn-achat-imm {
+  border-radius: 20px;
+  font-size: 15px;
+  background: #dc9770;
+  color: #fff;
+  display: inline-block;
+  border: solid 2px #dc9770; 
+  transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+  margin-top: 2em;
   padding: 8px 12px;
 }
 
