@@ -1,19 +1,8 @@
+<!DOCTYPE html>
 <?php 
 session_start();
-
-
-    $database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
-    
-    if(isset($_GET['Pseudo']))
-    {
-        $Pseudo = htmlspecialchars($_GET['Pseudo']);
-        $connexionvendeur = $database->prepare('SELECT * FROM identificationvendeurs WHERE Pseudo = ?');
-        $connexionvendeur->execute(array($Pseudo));
-
-        $infovendeur = $connexionvendeur->fetch();
+    $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
 ?>
-
-
 <html>
     <head>
         <link rel="icon" href="Icon.ico">
@@ -48,7 +37,7 @@ session_start();
     <body>
         <div class="page">
             <header class="page-header">
-                <nav id="nav_bar" class="navbar navbar-inverse">
+            <nav id="nav_bar" class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button id="myNavbarbutton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -63,10 +52,10 @@ session_start();
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="admin_login.php"title="Admin">Admin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="profil.php" title="Vendeur">Vendeur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="connexion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="profil.php" title="Mon Compte">Mon compte</a></li>
                                 <li class="nav-item  hidden-xs" >
                                     <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -91,7 +80,7 @@ session_start();
                                     </div>    
 
                                 </li>           
-                                <li class="nav-item visible-xs">
+                                <li class="nav-item visible-xs disabled">
                                     <a class="nav-link" href="#">
                                         <span class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></span>       
                                         <span class="fas fa-text">Panier</span>
@@ -100,36 +89,7 @@ session_start();
                             </ul>
                         </div>
                     </div>
-                </nav>
-
-                <nav id="nav_bar_2"class="navbar navbar-expand-md">
-                    <div class="container-fluid">
-                        <div class="navbar-header-2">
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Achat"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Achat</a>
-                                    <div class="dropdown-menu mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="Vendre">Vendre</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Votre compte">Votre compte</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Categorie"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégorie</a>
-                                    <div class="dropdown-menu  mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="FoT">Ferraille ou Trésor</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Bplm">Bon pour le musée</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="aVIP">Accessoir VIP</a>
-                                    </div>    
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
+            </nav>
 
             </header>
 
@@ -146,7 +106,7 @@ session_start();
                                     <div class="row">
                                         <div class="cover-back">
                                             <div class="cover-photo">
-                                                <img src ="<?php echo $infovendeur['Photo_fond']; ?>"  
+                                                <img src ="<?php echo $_SESSION['Photo_fond']; ?>"  
                                                             width= '100%' height= '250px' margin= '0 auto' background-color='#f5f5f5' position='relative' z-index='1'
                                                             background-size='cover' alt="Image de fond">
                                             </div>
@@ -155,11 +115,10 @@ session_start();
                                         <section class="text-center left-col user-info">
                                             <div class="profile-avatar">
                                                 <div class="inner">
-                                                    <img src ="<?php echo $infovendeur['Avatar']; ?>" 
+                                                    <img src ="<?php echo $_SESSION['Avatar']; ?>" 
                                                                 width='200' height='200' margin='4' alt="Avatar">                                                    
                                                 </div>
-                                            </div>
-                                            
+                                            </div>                                           
                                             <!-- Nav tabs -->
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class="nav-item">
@@ -168,54 +127,87 @@ session_start();
                                                 </a>
                                                 </li>
                                             </ul><!--nav-tabs close-->
-                                            <h1>Nom : <?php echo $infovendeur['Nom']; ?> </h1>
-                                            <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?>  </h2>
-                                            <h2>email : <?php echo $infovendeur['email']; ?></h2>
+                                            <h1>Nom : <?php echo $_SESSION['Nom']; ?> </h1>
+                                            <h2>Pseudo : <?php echo $_SESSION['Pseudo']; ?>  </h2>
+                                            <h2>email : <?php echo $_SESSION['email']; ?></h2>
                                         </section>
+            <?php
+
+try
+{
+   $emailduvendeur = $_SESSION['email'];
+  
+   $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
+   
+   $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+   $sql = "SELECT * From articles WHERE email_vendeur='$emailduvendeur'";
+$reponse = $database->query($sql);
+   
+   while ($data = $reponse->fetch())
+   { ?>
                                         <section class="section content">
                                             <div class="container-fluid">
                                                 <div class="middle-col">
                                                     <div class="image-grid">
                                                         <div class="card">
                                                             <div class="position-relative">
-                                                                <img class = "img-responsive"src="https://images.asos-media.com/products/nike-air-max-90-baskets-en-cuir-bleu-302519-400/9536548-1-blue?$n_640w$&wid=634&fit=constrain" class="card-img-top" alt="Nike - Air Max 90">
-                                                                <div >
-                                                                    <button type="button" class="btn rounded-circle" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                                                        <i >Acceder à la page de l'article</i>
-                                                                    </button>
+                                                            <img class="card-img-top" src =<?php echo $data['Photo'] ?>  alt="Image item"> 
+
+                                                            <div >
+                                                               
+                    <a href=
+                    <?php 
+                    $id=$data['ID'];
+                    if ($data['IDpaiement']== 1)
+                    {
+                      { echo "vend_art_recap.php?id=$id" ;}
+                    }?> >
+                    <button class="btn btn-primary-light" type="submit" 
+                    >Acceder a la page de l'article
+                    </button>
+                  </a>
                                                                     </div>
                                                             </div>
                                                             <div class="card-body">
-                                                                <h5 class="card-title"><small>Nike - Air Max 90 - Baskets en cuir - Bleu 302519-400</small></h5>
-                                                                <p class="card-text"><strong class="text-danger">111,49 €</strong> <del>139,99 €</del></p>
+                                                                <h5 class="card-title"><small><?php echo $data['Nom']?> </small></h5>
+                                                                <p class="card-text"><strong class="text-danger"><?php echo $data['Prix']?> </strong> €</p>
+                                                                <form action="supprimer.php" method="post">
+                  <table>
+                  
+
+             <td> <input type="hidden" name="IDarticlechoisi" value= <?php echo $data['ID'] ?>> </td>
+
+              <div class="card-footer">
+                <button class="btn btn-danger" type="submit" >Supprimer</button>
+              </div>
+            
+            </table>
+                </form>
                                                             </div>
                                                         </div>
-                                        
-                                                        <div class="card">
-                                                        <div class="position-relative">
-                                                            <img class = "img-responsive"src="https://images.asos-media.com/products/asos-white-baskets-en-daim-a-semelle-epaisse/10377589-1-multi?$n_640w$&wid=634&fit=constrain" class="card-img-top" alt="Baskets en daim à semelle épaisse">
-                                                            <div class="card-img-overlay d-flex justify-content-end align-items-end">
-                                                            <button type="button" class="btn rounded-circle" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                                                <i >Acceder à la page de l'article</i>
-                                                            </button>
-                                                            </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                            <h5 class="card-title">
-                                                                <small>ASOS WHITE - Baskets en daim à semelle épaisse</small>
-                                                            </h5>
-                                                            <p class="card-text"><strong class="text-danger">53,49 €</strong>  <del>89,99 €</del></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="vend_art_crea.php " class="fin round-fin-btn" title="">
-                                                            <span class="fa fa-plus"></span>
-                                                            <span class="fas fa-text">Nouvel Article</span>
-                                                    </a>
+
+                                                      
+                                                    
                                                 </div>
                                             </div>                                       
 
                                         </section>
+                                        <?php 
+   
+}
+}
+catch  (PDOException $e)
+{
+    echo $sql . "<br>" . $e.getMessage();
+}
+
+$database = null ; 
+ 
+
+?><a href="vend_art_crea.php " class="fin round-fin-btn" title="">
+<span class="fa fa-plus"></span>
+<span class="fas fa-text">Nouvel Article</span>
+</a>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +239,3 @@ session_start();
     </body>
 </html>
 
-<?php 
-    }
-?>

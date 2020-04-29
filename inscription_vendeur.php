@@ -1,31 +1,6 @@
 <?php
 session_start();
-    $database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
-
-    if(isset($_POST['formulairevendeurconnect']))
-    {        
-        //si les champs du formulaire ne sont pas vides, et que le mail n'est pas utilisé,  on ajoute les infos à la BDD
-        if(!empty($_POST['email']) AND !empty($_POST['MDP']))
-        {
-            //on récupère les données venant de notre fichier html
-            $email = $_POST['email'];
-            $MDP = $_POST['MDP'];
-
-            $comparaisonmail = $database->prepare("SELECT * FROM identificationvendeurs WHERE email = ? AND Pseudo = ?");
-            $comparaisonmail->execute(array($email, $Pseudo));
-            $mailcompare = $comparaisonmail->rowCount();
-            if($mailcompare == 0)
-            {
-                $nouveauvendeur = $database->prepare("INSERT INTO identificationvendeurs(email, MDP) VALUES (?, ?)");
-                $nouveauvendeur->execute(array($email, $MDP));
-                echo "OK AJOUT";
-            }  
-            else
-            {
-                echo "Adresse mail déjà utilisé, êtes-vous sûr ne pas déjà avoir un compte vendeur?";            
-            }
-        }
-    }
+    $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
 ?>
 
 <html>
@@ -69,10 +44,10 @@ session_start();
             
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="admin_login.php"title="Admin">Admin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="connexion_vendeur.php" title="Vendeur">Vendeur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="connexion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="connexion_vendeur.php" title="Mon Compte">Mon compte</a></li>
                             <li class="nav-item  hidden-xs" >
                                 <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                     <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -116,40 +91,55 @@ session_start();
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 text-left"> 
-                                <br>   
-                                <form class="form-horizontal needs-validation" novalidate action="/action_page.php">
-                                    <br>
-                                                            <!-- nom/prenom/adresse input-->
-                                    <div class="form-group">
-                                    <label class="control-label col-sm-2" for="Prenom">Prénom:</label>
-                                        <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="prenom" placeholder value required>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                    <label class="control-label col-sm-2" for="nom">Nom:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="nom" placeholder="Entrer votre nom">
-                                    </div>
+                        <br>   
+                        <form class="form-horizontal needs-validation"  method="post" action="traitement_crea_vend.php" enctype="multipart/form-data">
+                            <br>
+                            <!-- nom/prenom/adresse input-->
+                            <div class="form-group">
+                            <label class="control-label col-sm-2" for="Pseudo">Pseudo:</label>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control" id="pseudo" placeholder value required name="pseudo">
                                 </div>
+                            </div>
                             <br>
                             <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <label class="control-label col-sm-2" for="nom">Nom:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="Entrer email">
+                                <input type="text" class="form-control" id="nom" placeholder="Entrer votre nom" name="Nom">
                             </div>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="photo">Ajouter une photo de profil:</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control-file" id="photo_profil">
                             </div>
-                        </div>
-                        <div class="text-right">
-                        <a id="btn_valider" type="submit" class="btn btn-default btn-right" href="C:\Users\noork\Documents\noor\noor ing3\Projet">Valider</a>
-                        </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="motdepasse">Mot de passe:</label>
+                                <div class="col-sm-10">
+                                    <input type="mdp" class="form-control" id="mdp" placeholder="Entrer mot de passe" name="MDP">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" placeholder="Entrer email" name="email">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="photo">Ajouter une photo de profil:</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control-file" id="photo_profil" name="Avatar">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="photo">Photo de couverture:</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control-file" id="photo_fond"  name="Fond">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="text-right">
+                            <input type="submit"  value="Valider">
+                            </div>
                         </form>
                     <br>                    
                     </div>                

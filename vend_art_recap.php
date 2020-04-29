@@ -1,61 +1,10 @@
+
 <?php
-//session_start();
+session_start();
 
 
 $database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
-$database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
-
-
-
-//déclaratio des variables pour récupérer la valeur des 2 pseudos
-$recherchepseudo = $database->prepare("SELECT * FROM identificationvendeurs WHERE Pseudo = ? ");
-$recherchepseudo->execute(array($Pseudo));
-$pseudotrouve = $recherchepseudo->rowCount();
-
-$recherchepseudo_vendeur = $database_items->prepare("SELECT * FROM identificationitems WHERE Pseudo_vendeur = ? ");
-$recherchepseudo_vendeur->execute(array($Pseudo_vendeur));
-$pseudo_vendeurtrouve = $recherchepseudo_vendeur->rowCount();                   
-
-//si les pseudos comparés sont les mêmes 
-if($pseudotrouve == $pseudo_vendeurtrouve)
-{
-
-
-if(isset($_GET['Pseudo']))
-{
-    $Pseudo = htmlspecialchars($_GET['Pseudo']);
-    $connexionvendeur = $database->prepare('SELECT * FROM identificationvendeurs WHERE Pseudo = ?');
-    $connexionvendeur->execute(array($Pseudo));
-
-    $infovendeur = $connexionvendeur->fetch();
-
-    $Photo = $_GET['Photo'];    
-    $connexionitem = $database_items->prepare('SELECT * FROM identificationitems WHERE Photo = ?');
-    $connexionitem->execute(array($Photo));
-    $infoitem = $connexionitem->fetch();
-
-    if(isset($_GET['Photo']))
-    {
-
-        echo "recuo photo ok";
-    }
-    else
-    {
-        echo "erreur recup photo";
-    }
-}
-else
-{
-    echo "erreur recup pseudo";
-}
-
 ?>
-
-
-
-
-
-
 <html>
     <head>
         <link rel="icon" href="Icon.ico">
@@ -102,17 +51,17 @@ else
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="profil.html">
+                            <a class="navbar-brand" href="profil.php">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="admin_login.php"title="Admin">Admin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profil.php" title="Vendeur">Vendeur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="connexion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profil.php" title="Mon Compte">Mon compte</a></li>
                                 <li class="nav-item  hidden-xs" >
                                     <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -148,34 +97,6 @@ else
                     </div>
                 </nav>
 
-                <nav id="nav_bar_2"class="navbar navbar-expand-md">
-                    <div class="container-fluid">
-                        <div class="navbar-header-2">
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Achat"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Achat</a>
-                                    <div class="dropdown-menu mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="Vendre">Vendre</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Votre compte">Votre compte</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Categorie"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégorie</a>
-                                    <div class="dropdown-menu  mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="FoT">Ferraille ou Trésor</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Bplm">Bon pour le musée</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="aVIP">Accessoir VIP</a>
-                                    </div>    
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
 
             </header>
 
@@ -184,27 +105,51 @@ else
                     <div class="col-sm ">
                         <div class="container">
 
-                            <div class="row">
-                                <div class="cover-back">
-                                    <div class="cover-photo"></div>
-                                </div>
-                                <div class="body-contenu">
-                                    <section class="text-center left-col user-info">
-                                        <div class="profile-avatar">
-                                        <div class="inner"></div>
+                        <div class="row">
+                                        <div class="cover-back">
+                                            <div class="cover-photo">
+                                                <img src ="<?php echo $_SESSION['Photo_fond']; ?>"  
+                                                            width= '100%' height= '250px' margin= '0 auto' background-color='#f5f5f5' position='relative' z-index='1'
+                                                            background-size='cover' alt="Image de fond">
+                                            </div>
                                         </div>
+                                        <div class="body-contenu">
+                                        <section class="text-center left-col user-info">
+                                            <div class="profile-avatar">
+                                                <div class="inner">
+                                                    <img src ="<?php echo $_SESSION['Avatar']; ?>" 
+                                                                width='200' height='200' margin='4' alt="Avatar">                                                    
+                                                </div>
+                                            </div>    
                                         
                                         <!-- Nav tabs -->
                                         <ul class="nav navbar-nav " role="tablist">
                                             <li class="nav-item">
-                                                <a class=" text-center nav-link" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/profil-edition.html" >
+                                                <a class=" text-center nav-link" href="profil_edition.php" >
                                                 <i class="fa fa-key"></i> Editer Profil
                                                 </a>
                                             </li>
                                         </ul><!--nav-tabs close-->
-                                        <h1>Nom : <?php echo $infovendeur['Nom']; ?></h1>
-                                        <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?></h2>                                       
+                                        <h1>Nom : <?php echo $_SESSION['Nom']; ?> </h1>
+                                            <h2>Pseudo : <?php echo $_SESSION['Pseudo']; ?>  </h2>
+                                            <h2>email : <?php echo $_SESSION['email']; ?></h2>                                     
                                     </section>
+
+                                    <?php
+
+try
+{
+  
+
+   $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
+   
+   $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+   $sql = "SELECT * From articles WHERE IDcategorie=$categorie";
+$reponse = $database->query($sql);
+   
+   
+   while ($data = $reponse->fetch())
+   { ?>
                                     <section class="section content">
                                         <div class="container-fluid">
                                             <div class="middle-col">                                                                                     
@@ -215,19 +160,16 @@ else
                                                         <div class="carousel-wrapper">
                                                             <div class="carousel" data-flickity>
                                                             <div class="carousel-cell">
-                                                                <h3>Product 1</h3>
-                                                                <a class="more" href="">Explore more</a>                                                                
-                                                                <img src ="<?php echo $infoitem['Photo']; ?>">
+                                                                <h3>Image 1</h3>
+                                                                <img src ="<?php echo $data['Photo']; ?>">
                                                             </div>
                                                             <div class="carousel-cell">
-                                                                <h3>Product 2</h3>
-                                                                <a class="more" href="">Explore more</a>
-                                                                <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
+                                                                <h3>Image 2</h3>
+                                                                <img src ="<?php echo $data['Photo2']; ?>">
                                                             </div>
                                                             <div class="carousel-cell">
-                                                                <h3>Product 3</h3>
-                                                                <a class="more" href="">Explore more</a>
-                                                                <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" />
+                                                                <h3>Video</h3>
+                                                                <img src ="<?php echo $data['Video']; ?>">
                                                             </div>
                                                             </div>                                                          
 
@@ -239,34 +181,38 @@ else
                                                             <form action="#" method="get" accept-charset="utf-8">
                                                                 <table>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td><h3>Nom de l'article </h3></td>
-                                                                            <td><input id="nom_art" name="nom_art" type="text"
-                                                                                class="form-control"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label class="control-label" for="numid">Numero d'identification:</label></td>
-                                                                            <td><input id="numid" name="numid" type="number" 
-                                                                                    class="form-control"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label class="control-label" for="description">Description:</label></td>
-                                                                            <td><textarea class="form-control" id="description" rows="3" placeholder="Qualité et Défault"></textarea></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label class="control-label" for="categorie">Catégorie:</label></td>
-                                                                            <td><input id="categorie" name="categorie" type="text"
-                                                                                class="form-control"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label class="control-label" for="methode_achat">Méthode d'achat:</label></td>
-                                                                            <td><input id="methode_achat" name="methode_achat" type="text"
-                                                                                class="form-control"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label class="control-label" for="prix">Prix:</label></td>
-                                                                            <td><input type="number" class="form-control" id="prix" placeholder="220€"></td>
-                                                                        </tr>               
+                                                                    <tr>
+                                                                        <td><label for="email_vendeur">votre email vendeur:</label></td>
+                                                                        <td><h4 id="email_vendeur"> </h4><?php echo $data['email_vendeur']; ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label for="num_id">Numero d'identification:</label></td>
+                                                                        <td><h4 id="num_id"> </h4><?php echo $data['num_id']; ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label for="Nom">Nom de l'article:</label></td>
+                                                                        <td><h4 id="Nom"> </h4><?php echo $data['Nom']; ?></td>
+                                                                    </tr>  
+                                                                    <tr>
+                                                                    <td><label for="Description">Description:</label></td>
+                                                                        <td><h4 id="Description"> </h4><?php echo $data['descript']; ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td><label for="Prix">Prix:</label></td>
+                                                                        <td><h4 id="Prix"><?php echo $data['Prix']; ?>€ </h4></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label class="control-label" for="cat">Categorie:</label></td>
+                                                                        <td class="text-center">
+                                                                            <label class="custom-control-label" for="access" name="IdCategorie" value=3>Accessoire VIP</label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label class="control-label" for="cat">Methode d'achat:</label></td>
+                                                                        <td class="text-center">
+                                                                        </td>
+
+                                                                    </tr>               
                                                                     </tbody>
                                                                 </table>
                                                             </form>
@@ -301,7 +247,7 @@ else
                                                     </div>
                                                 </div>
 
-                                                <a href="#" class="fin round-fin-btn-crea" title="">
+                                                <a href="profil.php" class="fin round-fin-btn-crea" title="">
                                                     <i class="fa fa-check"></i> Valider
                                                 </a>
                                             </div>
@@ -311,6 +257,19 @@ else
                             </div>
                         </div>
                     </div>
+                    <?php 
+   
+}
+}
+catch  (PDOException $e)
+{
+    echo $sql . "<br>" . $e.getMessage();
+}
+
+$database = null ; 
+ 
+
+?>
                 </div>
             </main>
 

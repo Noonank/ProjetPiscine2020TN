@@ -1,57 +1,8 @@
 <?php 
 session_start();
-
-    $database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
-    
-   //header("Location: profil_edition.php?Nom=".$_SESSION['Nom']);
-        
-    if(isset($_GET['Pseudo']))
-    {
-        $Pseudo = htmlspecialchars($_GET['Pseudo']);
-        $connexionvendeur = $database->prepare('SELECT * FROM identificationvendeurs WHERE Pseudo = ?');
-        $connexionvendeur->execute(array($Pseudo));
-
-        $infovendeur = $connexionvendeur->fetch();
-
-
-        //var_dump($_FILES);
-
-        if(!empty($_FILES))
-        {
-            $file_name = $_FILES['Avatar']['name'];
-            $file_extension = strrchr($file_name, ".");
-            $file_tmp_name = $_FILES['Avatar']['tmp_name'];
-            $file_dest = 'Membres/'.$file_name;
-
-            $extensions_autorisees = array('.png', '.PNG', '.jpg', '.JPG');
-
-            if(in_array($file_extension, $extensions_autorisees))
-            {
-                if(move_uploaded_file($file_tmp_name, $file_dest ))
-                {
-                    $avatar_upd = $database->prepare('INSERT INTO identificationvendeurs(Avatar) VALUES(?)');
-                    $avatar_upd->execute(array($file_name, $file_dest));   
-                }
-            }
-            else
-            {
-                echo "Le format de l'avatar n'est pas le bon. Veuillez réessayer s'il vous plaît.";
-            }
-            
-        }
-
-    
-    }
-    else 
-    {
-        echo "ECHEC / N'ARRIVE PAS A PASSER DE PROFIL.PHP A PROFIL_EDITION.PHP EN GARDANT LES DONNEES";
-    }
-  
+    $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
 
 ?>
-
-
-
 <html>
     <head>
         <link rel="icon" href="Icon.ico">
@@ -95,17 +46,17 @@ session_start();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="profil.html">
+                            <a class="navbar-brand" href="profil.php">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profil_admin.php"title="Admin">Admin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="profil.php" title="Vendeur">Vendeur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="connextion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                                <li class="nav-item"><a class="nav-link" href="profil.php" title="Mon Compte">Mon compte</a></li>
                             <li class="nav-item  hidden-xs" >
                             <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -130,40 +81,12 @@ session_start();
                                     </div>    
 
                                 </li>           
-                                <li class="nav-item visible-xs">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item visible-xs disabled">
+                                    <a class="nav-link">
                                         <span class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></span>       
                                         <span class="fas fa-text">Panier</span>
                                     </a>
                                 </li>       
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                <nav id="nav_bar_2"class="navbar navbar-expand-md">
-                    <div class="container-fluid">
-                        <div class="navbar-header-2">
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Achat"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Achat</a>
-                                    <div class="dropdown-menu mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="Vendre">Vendre</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Votre compte">Votre compte</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" href="#"title="Categorie"type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégorie</a>
-                                    <div class="dropdown-menu  mt-0 w-100 shadow border-outline-success" aria-labelledby="dropdownMenuLink">
-                                        <a class="nav-link dropdown-item" href="#"title="FoT">Ferraille ou Trésor</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="Bplm">Bon pour le musée</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="nav-link dropdown-item" href="#" title="aVIP">Accessoir VIP</a>
-                                    </div>    
-                                </li>
-
                             </ul>
                         </div>
                     </div>
@@ -197,20 +120,19 @@ session_start();
                                                     </span>
                                                 </div>
                                             </div>
-                                            <!--
                                             <span class="btn btn-default btn-file">
                                                         Modifier fond <input type="file">
-                                            </span> -->
-                                            <h1>Nom : <?php echo $infovendeur['Nom']; ?> </h1>
-                                            <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?></h2>
-                                            <h2>email : <?php echo $infovendeur['email']; ?></h2><br>
+                                            </span>                                            
+                                            <h1>Nom : <?php echo $_SESSION['Nom']; ?> </h1>
+                                            <h2>Pseudo : <?php echo $_SESSION['Pseudo']; ?></h2>
+                                            <h2>email : <?php echo $_SESSION['email']; ?></h2><br>
                                             <!-- Nav tabs -->
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class=" text-center nav-item">
                                                     <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
                                                     <i class="fa fa-check"></i><input type="submit" value="Valider le profil"> 
                                                     </a>
-                                                    <a class="nav-link" ref="#change" role="tab" data-toggle="tab">
+                                                    <a class="nav-link" href="profil.php">
                                                         <i class="fa fa-times"></i> Annuler
                                                     </a>
                                                     

@@ -1,37 +1,8 @@
 <?php    
 session_start();
 
-    $database = new PDO('mysql:host=localhost; dbname=acheteursinscrits', 'root', '');
-    //$database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
-
-
-    if(isset($_GET['Nom']))
-    {
-        $Nom = ($_GET['Nom']);
-        $nom_acheteur = $database->prepare("SELECT * FROM identificaionacheteurs WHERE Nom = ?");
-        $nom_acheteur->execute(array($Nom));
-        $infoacheteur = $nom_acheteur->fetch();        
-/*
-        $database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
-        if(isset($_GET['Photo']))
-        {
-            $Photo = ($_GET['Photo']);
-            $connexionitem = $database_items->prepare('SELECT * FROM identificationitems WHERE Photo = ?');
-            $connexionitem->execute(array($Photo));
-            $infoitem = $connexionitem->fetch();
-    
-            echo "recup photo ok";
-        }
-        else
-        {
-            echo "erreur recup photo";
-        }*/
-
-    }
-     
+    $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
 ?>
-
-
 
 <html>
 
@@ -75,16 +46,25 @@ session_start();
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>                        
                   </button>
-                  <a class="navbar-brand" href="accueil_acheteur.php?Nom=".$_SESSION['Nom']);>
+                  <a class="navbar-brand" href="accueil.php">
                   <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                   </a>    
               </div>
       
               <div class="collapse navbar-collapse" id="myNavbar">
                   <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item"><a class="nav-link" href="connexion_admin.php" title="Admin">Admin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="connexion_vendeur.php" title="Vendeur">Vendeur</a></li>
-                    <li class="nav-item"><a class="nav-link" href="connexion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                    <li class="nav-item-active">
+                      <h8></h8>
+                    <li class="nav-item">
+                      <a class="nav-link" href="admin_login.php"
+                      >Admin</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href=
+                      "connexion_vendeur.php"
+                      >Vendeur</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href=
+                     "connexion_acheteur.php"             >Acheteur</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
                      
 
@@ -98,7 +78,7 @@ session_start();
 
                       </li>           
                       <li class="nav-item hidden-xs">
-                          <a class="nav-link" href="#">
+                          <a class="nav-link" href="panier.php">
                               <i class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></i>    
                           </a>
                       </li> 
@@ -113,7 +93,7 @@ session_start();
 
                       </li>           
                       <li class="nav-item visible-xs">
-                          <a class="nav-link" href="panier.php?Nom=".$_SESSION['Nom']);">
+                          <a class="nav-link" href="panier.php">
                               <span class="fa fa-shopping-basket" aria-hidden="true" title="Panier"></span>       
                               <span class="fas fa-text">Panier</span>
                           </a>
@@ -132,9 +112,9 @@ session_start();
                 <h class="navbar-brand">Catégorie</h>
             </li>
             <li class="active_onglet">
-            <a class="nav-link" href="categorie_FER.php?Nom=".$_SESSION['Nom']); title="FER">Ferraille ou Trésor</a></li>                          
-            <li ><a class="nav-link" href="categorie_MUS.php?Nom=".$_SESSION['Nom']); title="MUS">Bon pour le Musée</a></li>
-            <li ><a class="nav-link" href="categorie_VIP.php?Nom=".$_SESSION['Nom']); title="VIP" >Accessoires VIP</a></li>
+            <a class="nav-link" href="categorie_FER.php" title="FER">Ferraille ou Trésor</a></li>                          
+            <li ><a class="nav-link" href="categorie_MUS.php" title="MUS">Bon pour le Musée</a></li>
+            <li ><a class="nav-link" href="categorie_VIP.php" title="VIP" >Accessoires VIP</a></li>
         </ul>
     </div>
 </div>
@@ -145,62 +125,77 @@ session_start();
       <main class="page-content">
         <div class="col-sm-2" ></div>
             <div class="col-sm-8 text-left">     
-              <h1>Voici l'ensemble des articles présents sur le site</h1>
 
 <?php
 
-   $database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
-    if(isset($_GET['Photo']))
-    {
-        $Photo = ($_GET['Photo']);
-        $connexionitem = $database_items->prepare('SELECT * FROM identificationitems WHERE Photo = ?');
-        $connexionitem->execute(array($Photo));
-        $infoitem = $connexionitem->fetch();  
-    }
-?>
+try
+{
+  
+   $categorie = 1;
+   $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
+   
+   $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+   $sql = "SELECT * From articles WHERE IDcategorie=$categorie";
+$reponse = $database->query($sql);
+   
+   
+   while ($data = $reponse->fetch())
+   { ?>
 
             <!-- AFFICHAGE DES IMAGES : 3 IMAGES PAR LIGNE ET INFORMATION SUR LE NOM DU VENDEUR -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="carteborder text-center">
                     <div class="card_cat">
                         <a href="achatImmediat.php">
-                     <!--   <img class="card-img-top" src ="<?php echo $infoitem['Photo']; ?>  alt="Image item"> -->
+                     <img class="card-img-top" src =<?php echo $data['Photo'] ?>  alt="Image item"> 
                         </a>
                     <div class="card-body">
                     <h4 class="card-title">                                            
-                    <a href="#">Nom de l'article : <?php echo $infoitem['Nom']; ?></a>
+                    <a href="#">Nom de l'article : <?php echo $data['Nom'] ?></a>
                     </h4>
-                    <h5>Prix de l'article : <?php echo $infoitem['Prix']; ?>€</h5>
-                    <p class="card-text">Description de l'article </p>
+                    <h5>Prix de l'article : <?php echo $data['Prix'] ?>€</h5>
+                   
                       
-                    <button class="btn btn-primary-light" type="submit">Acheter</button>
+                    <a href=
+                    <?php 
+                    $id=$data['ID'];
+                    if ($data['IDpaiement']== 1)
+                    {
+                      { echo "achatImmediat.php?id=$id" ;}
+                    }
+                    if ($data['IDpaiement']==2)
+                    {
+                      { echo "achatEnchere.php?id=$id" ;}
+                    }
+                      ?> >
+                    <button class="btn btn-primary-light" type="submit" 
+                    >Acheter
+                    </button>
+                  </a>
                     <button class="btn btn-primary-light" type="submit">Panier</button>
-                </div>
-            </div>
+                    </div>
+                    
+                  </div>
         </div>
     </div>
     <!-- FIN DE L'AFFICHAGE DES IMAGES -->
+    <?php 
+   
+   }
+  }
+  catch  (PDOException $e)
+  {
+       echo $sql . "<br>" . $e.getMessage();
+  }
+
+  $database = null ; 
     
+
+  ?>
+
     </div>
       </main>
 
-      <!-- FOOTER DEBUT -->  
-      <footer class="page-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12">
-              <h6 class="text-uppercase font-weight-bold">Informations additionnelles</h6>
-            </div>
-        
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <h6 class="text-uppercase font-weight-bold">Contact</h6>
-            </div>
-          </div>
-        </div>
-          
-        <div class="footer-copyright text-center">&copy; 2020 Copyright | Droit d'auteur: Noor&Tiffanie + nos précieuses sources</div>
-      </footer>
-      <!-- FOOTER FIN --> 
     </div>
   </body>
 </html>

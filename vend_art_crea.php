@@ -1,85 +1,8 @@
 <?php
 session_start();
 
-
-    $database = new PDO('mysql:host=localhost; dbname=vendeursinscrits', 'root', '');
-    $database_items = new PDO('mysql:host=localhost; dbname=itemsenregistres', 'root', '');
-
-    
-   // header("Location: vend_art_crea.php?Nom=".$_SESSION['Nom']);
-    
-        
-    if(isset($_GET['Pseudo']))
-    {
-        $Pseudo = htmlspecialchars($_GET['Pseudo']);
-        $connexionvendeur = $database->prepare('SELECT * FROM identificationvendeurs WHERE Pseudo = ?');
-        $connexionvendeur->execute(array($Pseudo));
-
-        $infovendeur = $connexionvendeur->fetch();
-
-
-        if(isset($_POST['formulaireajoutitem']))
-        {
-            $Pseudo_vendeur = $_POST['Pseudo_vendeur'];
-            $num_id = $_POST['num_id'];
-            $Nom = $_POST['Nom'];
-            $Photo = $_POST['Photo'];
-            $Video = $_POST['Video'];
-            $Description = $_POST['Description'];
-            $Prix = $_POST['Prix'];
-            $Categorie = $_POST['Categorie'];
-
-            //si les champs du formulaire ne sont pas vides
-            //pour l'instant photo et video peuvent être vides
-            if(!empty($Pseudo_vendeur) AND !empty($num_id) AND !empty($Nom) AND  !empty($Description) AND !empty($Prix) AND !empty($Categorie))
-            {
-                //déclaratio des variables pour récupérer la valeur des 2 pseudos
-                $recherchepseudo = $database->prepare("SELECT * FROM identificationvendeurs WHERE Pseudo = ? ");
-                $recherchepseudo->execute(array($Pseudo));
-                $pseudotrouve = $recherchepseudo->rowCount();
-
-                $recherchepseudo_vendeur = $database_items->prepare("SELECT * FROM identificationitems WHERE Pseudo_vendeur = ? ");
-                $recherchepseudo_vendeur->execute(array($Pseudo_vendeur));
-                $pseudo_vendeurtrouve = $recherchepseudo_vendeur->rowCount();                   
-
-                //si les pseudos comparés sont les mêmes 
-                if($pseudotrouve == $pseudo_vendeurtrouve)
-                {
-                    //image
-                    if(!empty($_FILES))
-                    {
-                        $file_name = $_FILES['Photo']['name'];
-                        $file_extension = strrchr($file_name, ".");
-                        $file_tmp_name = $_FILES['Photo']['tmp_name'];
-                        $file_dest = 'Items/'.$file_name;
-
-                        $extensions_autorisees = array('.png', '.PNG', '.jpg', '.JPG');
-
-                        if(in_array($file_extension, $extensions_autorisees))
-                        {
-                            if(move_uploaded_file($file_tmp_name, $file_dest ))
-                            {
-                                $nouvelitem = $database_items->prepare("INSERT INTO identificationitems(Pseudo_vendeur, num_id, Nom, Photo, Video, Description, Prix, Categorie)
-                                                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                                $nouvelitem->execute(array($Pseudo_vendeur, $num_id, $Nom, $Photo, $Video, $Description, $Prix, $Categorie));
-                                echo "OK AJOUT";
-                            }
-                        }
-                    }                    
-                }
-                else
-                {
-                    echo "Pseudo vendeur non trouvé, êtes-vous sûr de l'avoir saisi correctement ?";            
-                }
-            }
-            else
-            {
-                echo "Veuillez remplir tous les champs ci dessus s'il vous plaît!";
-            }
-        }        
-    }
+    $database = new PDO('mysql:host=localhost; dbname=projet', 'root', '');
 ?>
-
 
 <html>
     <head>
@@ -168,17 +91,17 @@ session_start();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="profil.html">
+                            <a class="navbar-brand" href="profil.php">
                             <img src="Logo.png" alt="ebayECE" title="ebayece" height="50">
                             </a>    
                         </div>
                 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link" href="#"title="Admin">Admin</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Vendeur">Vendeur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Acheteur">Acheteur</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" title="Mon Compte">Mon compte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="admin_login.php"title="Admin">Admin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profil.php" title="Vendeur">Vendeur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="connexion_acheteur.php" title="Acheteur">Acheteur</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profil.php" title="Mon Compte">Mon compte</a></li>
                                 <li class="nav-item  hidden-xs" >
                                     <a class="nav-link" href="#" type="button" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
                                         <span class="fa fa-bell" aria-hidden="true" title="Notification"></span>               
@@ -257,80 +180,70 @@ session_start();
                             <div class="cart-wrap">
                                 <div class="container">
 
-                                    <div class="row">
+                                <div class="row">
                                         <div class="cover-back">
-                                            <div class="cover-photo"></div>
+                                            <div class="cover-photo">
+                                                <img src ="<?php echo $_SESSION['Photo_fond']; ?>"  
+                                                            width= '100%' height= '250px' margin= '0 auto' background-color='#f5f5f5' position='relative' z-index='1'
+                                                            background-size='cover' alt="Image de fond">
+                                            </div>
                                         </div>
-
                                         <div class="body-contenu">
                                         <section class="text-center left-col user-info">
                                             <div class="profile-avatar">
-                                                <div class="inner"></div>
-                                            </div>
-                                            
+                                                <div class="inner">
+                                                    <img src ="<?php echo $_SESSION['Avatar']; ?>" 
+                                                                width='200' height='200' margin='4' alt="Avatar">                                                    
+                                                </div>
+                                            </div>    
                                             <!-- Nav tabs -->
                                             <ul class="nav navbar-nav " role="tablist">
                                                 <li class="nav-item">
-                                                    <a class=" text-center nav-link" href="file:///C:/Users/noork/Desktop/ProjetPiscine2020TN/profil-edition.html" >
+                                                    <a class=" text-center nav-link" href="profil_edition.php" >
                                                         <i class="fa fa-key"></i> Editer Profil
                                                     </a>
                                                 </li>
                                             </ul><!--nav-tabs close-->
-                                            <h1>Nom : <?php echo $infovendeur['Nom']; ?> </h1>
-                                            <h2>Pseudo : <?php echo $infovendeur['Pseudo']; ?></h2>
-                                            <h2>email : <?php echo $infovendeur['email']; ?></h2><br>
+                                            <h1>Nom : <?php echo $_SESSION['Nom']; ?> </h1>
+                                            <h2>Pseudo : <?php echo $_SESSION['Pseudo']; ?>  </h2>
+                                            <h2>email : <?php echo $_SESSION['email']; ?></h2>
                                         </section>
                                         <section class="section content">
                                             <div class="container-fluid">
                                                 <div class="middle-col">
                                         
                                                     <!-- Categorie-->
-                                                    <form class="form-horizontal needs-validation"  method="POST" action="" enctype="multipart/form-data">
+                                                    <form class="form-horizontal needs-validation"  method="POST" action="traitement_vend_article_crea.php" enctype="multipart/form-data">
                                                     <div class="form-group text-center">
                                                         <h3 class="text-center">Nouvel Article</h3>
                                                         
                                                         <table class="table table-dark table-hover text-center">
                                                             <tbody>
                                                             <tr>
-                                                                <td><label class="control-label" for="Pseudo_vendeur">Veuillez saisir votre pseudo vendeur:</label></td>
-                                                                <td><input id="Pseudo_vendeur" type="text" class="form-control" name="Pseudo_vendeur" ></td>
+                                                                <td><label class="control-label" for="email_vendeur">Veuillez saisir votre email vendeur:</label></td>
+                                                                <td><input type="text" class="form-control" id="email_vendeur" name="email_vendeur"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label class="control-label" for="num_id">Numero d'identification:</label></td>
-                                                                <td><input id="num_id" type="number" class="form-control" name="num_id" ></td>
+                                                                <td><input type="text" id="num_id" type="number" class="form-control" name="num_id" ></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label class="control-label" for="Nom">Nom:</label></td>
                                                                 <td><input id="Nom" type="text" class="form-control" name="Nom"></td>                                                       
                                                             </tr>  
                                                             <tr>
-                                                                <td><a href="javascript:void(0)" onclick="$('#Photo').click()">
-                                                                <br><span class="file btn btn-lg btn-primary-light">Ajouter Photos:</span> </a>
-                                                                    <input type="file" id="Photo" style="display: none;" class="form-control" name="Photo"></td>
+                                                                <td><label class="control-label" for="photo">Ajouter une photo</label>
+                                                                <input type="file" class="form-control-file" id="photo_fond"  name="Photo">
                                                                 <td>
-                                                                    <div class="preview-images-zone">
-                                                                        <div class="preview-image preview-show-1">
-                                                                            <div class="image-cancel" data-no="1">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
-                                                                        </div>
-                                                                        <div class="preview-image preview-show-2">
-                                                                            <div class="image-cancel" data-no="2">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
-                                                                        </div>
-                                                                        <div class="preview-image preview-show-3">
-                                                                            <div class="image-cancel" data-no="3">x</div>
-                                                                            <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
-                                                                            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                                                                </td>                                                                
+    </tr>
+    <tr>
+                                                                <td><label class="control-label" for="photo2">Ajouter une deuxieme photo </label>
+                                                                <input type="file" class="form-control-file" id="photo_fond"  name="Photo2">
+                                                                <td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label class="control-label" for="Nom">Description:</label></td>
-                                                                <td><input id="Description" type="text" class="form-control" name="Description" placeholder="Qualité et Défault"></td>
+                                                                <td><input id="Description" type="text" class="form-control" name="descript" placeholder="Qualité et Défault"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label class="control-label" for="Prix">Prix:</label></td>
@@ -338,36 +251,38 @@ session_start();
                                                             </tr>
                                                             <tr>
                                                                 <td><label class="control-label" for="cat">Categorie:</label></td>
-                                                                <td class="text-center">
-                                                                <input id="fer" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="fer">Ferraille ou Trésor</label>
-                                                                    <input id="mus" name="Categorie" type="radio" class="custom-control-input" checked="" required="">
-                                                                    <label class="custom-control-label " for="mus">Bon pour le Musée</label>
-                                                                    <input id="access" name="Categorie" type="radio" class="custom-control-input" required="">
-                                                                    <label class="custom-control-label" for="access">Accessoire VIP</label>
+                                                                <td class="text-center">Tapez 1 pour Ferrailles, tapez 2 pour Bon pour le musée, tapez 3 pour Accessoires VIP 
+                                                                <td><input type="number" class="form-control" id="Categorie" placeholder="0" name="Idcategorie"></td>
                                                                 </td>
                                                             </tr>
                                                             <tr id="video">
                                                                 <td><label class="control-label" for="video">Video:</label></td></td>
                                                                 <td>
-                                                                  <span class="btn btn-default btn-file">
-                                                                      Ajouter une video en mp4 <input type="file">
-                                                                  </span>                                                                        
                                                                   <input type="text" class="form-control" placeholder="veuillez copier coller le lien de votre vidéo" name="Video">
                                                                </td>
                                                             </tr>
-                                                            </tbody>
+                                                            <tr>
+  
+                                                                <td><label class="control-label" for="cat">Methodes de paiement:</label></td>
+                                                                <td class="text-center">Tapez 1 pour Achat Immediat, tapez 2 pour Enchere, tapez 3 pour Meilleur Offre
+                                                                <td><input type="number" class="form-control" id="Paiement" placeholder="0" name="Idpaiement"></td>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+                                                            </body>
                                                         </table>
 
-                                                        <a href="#" class="fin round-fin-btn-crea" title="">
-                                                            <i class="fa fa-times"></i> Annuler
-                                                        </a>
+                                                        
                                                         <div class="fin round-fin-btn-crea">
                                                             <i class="fa fa-check"></i> 
-                                                            <input type="submit" name="formulaireajoutitem" value="Valider">
+                                                            <input type="submit" value="Valider">
                                                         </div>
                                                     </div>
-                                                    </form>                                                                                          
+                                                    </form> 
+                                                    <div class="fin round-fin-btn-crea">
+                                                            <i class="fa fa-times"></i>
+                                                          <a href="profil.php">  <input type="submit" value="Annuler"></a>
+                                                        </div>                                                                                         
                                                 </div>
                                             </div>
                                         </section>
